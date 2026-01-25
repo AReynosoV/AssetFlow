@@ -59,17 +59,18 @@
             this.fluentDesignFormContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fluentDesignFormContainer1.Location = new System.Drawing.Point(260, 31);
             this.fluentDesignFormContainer1.Name = "fluentDesignFormContainer1";
-            this.fluentDesignFormContainer1.Size = new System.Drawing.Size(550, 530);
+            this.fluentDesignFormContainer1.Size = new System.Drawing.Size(631, 519);
             this.fluentDesignFormContainer1.TabIndex = 0;
             // 
             // gridControl1
             // 
             this.gridControl1.DataSource = this.assetBindingSource;
-            this.gridControl1.Location = new System.Drawing.Point(52, 171);
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gridControl1.Location = new System.Drawing.Point(0, 195);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.fluentFormDefaultManager1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(400, 200);
+            this.gridControl1.Size = new System.Drawing.Size(631, 324);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -89,6 +90,7 @@
             this.colCost});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // colId
             // 
@@ -144,7 +146,7 @@
             this.accordionControl1.Location = new System.Drawing.Point(0, 31);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
-            this.accordionControl1.Size = new System.Drawing.Size(260, 530);
+            this.accordionControl1.Size = new System.Drawing.Size(260, 519);
             this.accordionControl1.TabIndex = 1;
             this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -168,7 +170,7 @@
             this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
             this.fluentDesignFormControl1.Manager = this.fluentFormDefaultManager1;
             this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
-            this.fluentDesignFormControl1.Size = new System.Drawing.Size(810, 31);
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(891, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
             // 
@@ -176,15 +178,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 561);
+            this.ClientSize = new System.Drawing.Size(891, 550);
             this.ControlContainer = this.fluentDesignFormContainer1;
             this.Controls.Add(this.fluentDesignFormContainer1);
             this.Controls.Add(this.accordionControl1);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
+            this.MaximizeBox = false;
             this.Name = "FluentDesignForm1";
             this.NavigationControl = this.accordionControl1;
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Asset Flow by One Software";
             this.Load += new System.EventHandler(this.FluentDesignForm1_Load);
             this.fluentDesignFormContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
