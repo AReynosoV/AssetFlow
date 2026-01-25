@@ -48,5 +48,29 @@ namespace AssetFlow.App
                 }
             }
         }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            // 1. Creamos un objeto Asset nuevo (vacío)
+            var nuevoAsset = new Asset
+            {
+                PurchaseDate = DateTime.Now,
+                Status = "Nuevo"
+            };
+
+            // 2. Abrimos el editor (pasando el objeto vacío)
+            using (var editor = new XtraAssetEditor(nuevoAsset))
+            {
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    // 3. Obtenemos la lista actual del Grid y añadimos el nuevo
+                    var lista = gridControl1.DataSource as List<Asset>;
+                    lista?.Add(nuevoAsset);
+
+                    // 4. Refrescamos para que aparezca en pantalla
+                    gridControl1.RefreshDataSource();
+                }
+            }
+        }
     }
 }

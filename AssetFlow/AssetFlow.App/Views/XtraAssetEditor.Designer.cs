@@ -89,6 +89,7 @@
             this.IdTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.IdTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.IdTextEdit.Properties.MaskSettings.Set("mask", "N0");
+            this.IdTextEdit.Properties.ReadOnly = true;
             this.IdTextEdit.Size = new System.Drawing.Size(429, 20);
             this.IdTextEdit.StyleController = this.dataLayoutControl1;
             this.IdTextEdit.TabIndex = 4;
