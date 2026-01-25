@@ -352,7 +352,7 @@
             this.ClientSize = new System.Drawing.Size(758, 443);
             this.Controls.Add(this.dataLayoutControl1);
             this.Name = "XtraAssetEditor";
-            this.Text = "AssetEditor";
+            this.Text = "XtraAssetEditor";
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl2)).EndInit();
