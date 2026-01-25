@@ -13,9 +13,16 @@ namespace AssetFlow.App.Views
 {
     public partial class XtraAssetEditor : DevExpress.XtraEditors.XtraForm
     {
-        public XtraAssetEditor()
+        //Variable para mantener el objeto que editamos
+        public Models.Asset SelectedAsset { get; set; }
+        public XtraAssetEditor(Models.Asset asset)
+
         {
             InitializeComponent();
+            this.SelectedAsset = asset;
+
+            //Vinculamos el objeto al BindingSource
+            assetBindingSource.DataSource = asset;
         }
     }
 }

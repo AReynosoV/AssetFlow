@@ -416,3 +416,5 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+# evitará que el archivo licenses.licx de DevExpress vuelva a causar conflictos de fusión, ya que es un archivo que Visual Studio genera automáticamente y no es necesario en GitHub.
+*.licx
