@@ -20,6 +20,7 @@
             this.components = new System.ComponentModel.Container();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.IdTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.assetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.CategoryIdTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.PurchaseDateDateEdit = new DevExpress.XtraEditors.DateEdit();
@@ -37,10 +38,10 @@
             this.ItemForCost = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.assetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryIdTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties)).BeginInit();
@@ -57,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
@@ -93,6 +93,10 @@
             this.IdTextEdit.Size = new System.Drawing.Size(429, 20);
             this.IdTextEdit.StyleController = this.dataLayoutControl1;
             this.IdTextEdit.TabIndex = 4;
+            // 
+            // assetBindingSource
+            // 
+            this.assetBindingSource.DataSource = typeof(AssetFlow.App.Models.Asset);
             // 
             // NameTextEdit
             // 
@@ -168,6 +172,7 @@
             this.simpleButtonGuardar.StyleController = this.dataLayoutControl1;
             this.simpleButtonGuardar.TabIndex = 10;
             this.simpleButtonGuardar.Text = "Guardar";
+            this.simpleButtonGuardar.Click += new System.EventHandler(this.simpleButtonGuardar_Click);
             // 
             // simpleButtonCancelar
             // 
@@ -278,10 +283,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // assetBindingSource
-            // 
-            this.assetBindingSource.DataSource = typeof(AssetFlow.App.Models.Asset);
-            // 
             // XtraAssetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryIdTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties.CalendarTimeProperties)).EndInit();
@@ -312,7 +314,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraLayout.Customization;
+﻿using AssetFlow.App.Data;
+using DevExpress.XtraLayout.Customization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,37 @@ namespace AssetFlow.App.Controllers
 {
     public class AssetService
     {
-        public List<Models.Asset> GetMockAssets()
+        private readonly AssetDbContext _context;
+        public AssetService(AssetDbContext context)
         {
-            return new List<Models.Asset>
-            {
-                new Models.Asset { Id = 1, Name = "Laptop Dell XPS", CategoryId = 1, PurchaseDate = DateTime.Now.AddYears(-1), Status = "Activo", Cost = 1500 },
-                new Models.Asset { Id = 2, Name = "Monitor LG 27\"", CategoryId = 1, PurchaseDate = DateTime.Now.AddMonths(-6), Status = "Activo", Cost = 300 },
-                new Models.Asset { Id = 3, Name = "Licencia Visual Studio", CategoryId = 2, PurchaseDate = DateTime.Now, Status = "Asignado", Cost = 450 }
-            };
+            _context = context;
+        }
+        
+        public void AddAsset(Models.Asset asset)
+        {
+            _context.Assets.Add(asset);
+            _context.SaveChanges();
+        }
+
+        public void UpdateAsset(Models.Asset asset)
+        {
+            _context.Assets.Update(asset);
+            _context.SaveChanges();
+        }
+
+        public List<Models.Asset> GetAllAssets()
+        {
+            return _context.Assets
+                .Where (a => !a.IsDeleted)
+                .ToList();
+        }
+
+        public void SoftDeleteAsset(Models.Asset asset)
+        {
+            // En lugar de _context.Assets.Remove(asset), hacemos:
+            asset.IsDeleted = true;
+            _context.Update(asset);
+            _context.SaveChanges();
         }
     }
 }
