@@ -187,6 +187,10 @@
     <Compile Include="Migrations\20260126001605_InitialCreate.Designer.cs">
       <DependentUpon>20260126001605_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20260126132504_SetIdAsIdentity.cs" />
+    <Compile Include="Migrations\20260126132504_SetIdAsIdentity.Designer.cs">
+      <DependentUpon>20260126132504_SetIdAsIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AssetDbContextModelSnapshot.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Program.cs" />
