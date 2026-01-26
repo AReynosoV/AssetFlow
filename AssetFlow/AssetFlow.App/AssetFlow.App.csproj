@@ -191,6 +191,10 @@
     <Compile Include="Migrations\20260126132504_SetIdAsIdentity.Designer.cs">
       <DependentUpon>20260126132504_SetIdAsIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20260126165630_AddSoftDeleteToAsset.cs" />
+    <Compile Include="Migrations\20260126165630_AddSoftDeleteToAsset.Designer.cs">
+      <DependentUpon>20260126165630_AddSoftDeleteToAsset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AssetDbContextModelSnapshot.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Program.cs" />

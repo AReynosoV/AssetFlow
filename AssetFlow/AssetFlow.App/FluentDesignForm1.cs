@@ -86,6 +86,23 @@ namespace AssetFlow.App
             }
         }
 
+        private void PerformDelete()
+        {
+            var selectedAsset = gridView1.GetFocusedRow() as Asset;
+
+            if (selectedAsset != null)
+            {
+                var result = MessageBox.Show($"¿Está seguro que desea eliminar el activo: {selectedAsset.Name}?",
+                    "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    _assetService.SoftDeleteAsset(selectedAsset);
+                    LoadData(); // Recargamos el grid, el registro "desaparecerá"
+                }
+            }
+        }
+
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             // 1. Creamos un objeto Asset nuevo (vacío)
@@ -116,6 +133,19 @@ namespace AssetFlow.App
                     //// 4. Refrescamos para que aparezca en pantalla
                     //gridControl1.RefreshDataSource();
                 }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            PerformDelete();
+        }
+
+        private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                PerformDelete();
             }
         }
     }

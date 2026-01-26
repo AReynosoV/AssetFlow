@@ -42,6 +42,6 @@ namespace AssetFlow.App.Models
         [DisplayName("Costo")]
         public decimal Cost { get; set; }
 
-
+        public bool IsDeleted { get; set; } = false;
     }
 }

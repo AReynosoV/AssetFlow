@@ -45,6 +45,7 @@
             this.accordionControlElement1 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnNuevo = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
+            this.btnEliminar = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).BeginInit();
@@ -88,6 +89,7 @@
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView1_KeyDown);
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // colId
@@ -151,7 +153,8 @@
             // accordionControlElement1
             // 
             this.accordionControlElement1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            this.btnNuevo});
+            this.btnNuevo,
+            this.btnEliminar});
             this.accordionControlElement1.Expanded = true;
             this.accordionControlElement1.Name = "accordionControlElement1";
             this.accordionControlElement1.Text = "Lista de Activos";
@@ -174,6 +177,14 @@
             this.fluentDesignFormControl1.Size = new System.Drawing.Size(1136, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btnEliminar.Text = "Eliminar Activo";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // FluentDesignForm1
             // 
@@ -218,6 +229,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn colCost;
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnNuevo;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btnEliminar;
     }
 }
 

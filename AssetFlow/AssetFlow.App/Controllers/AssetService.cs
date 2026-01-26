@@ -16,11 +16,7 @@ namespace AssetFlow.App.Controllers
         {
             _context = context;
         }
-        //public List<Models.Asset> GetMockAssets()
-        //{
-        //    return _context.Assets.ToList();
-        //}
-
+        
         public void AddAsset(Models.Asset asset)
         {
             _context.Assets.Add(asset);
@@ -35,7 +31,17 @@ namespace AssetFlow.App.Controllers
 
         public List<Models.Asset> GetAllAssets()
         {
-            return _context.Assets.ToList();
+            return _context.Assets
+                .Where (a => !a.IsDeleted)
+                .ToList();
+        }
+
+        public void SoftDeleteAsset(Models.Asset asset)
+        {
+            // En lugar de _context.Assets.Remove(asset), hacemos:
+            asset.IsDeleted = true;
+            _context.Update(asset);
+            _context.SaveChanges();
         }
     }
 }
