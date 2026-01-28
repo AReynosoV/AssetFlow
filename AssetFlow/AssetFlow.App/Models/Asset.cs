@@ -14,31 +14,37 @@ namespace AssetFlow.App.Models
     public class Asset
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El nombre del activo es obligatorio.")]
         [DisplayName("Nombre del Activo")]
         public string Name { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Debe asignar una categiría al activo.")]
         [DisplayName("Categoria")]
-
         public int CategoryId { get; set; }
 
-        [Required]
+        [ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
+
+
+        [Required(ErrorMessage = "Indicar la fecha de compra del activo.")]
         [DisplayName("Fecha de Compra")]
         public DateTime PurchaseDate
         {
             get; set;
         }
 
-        [Required]
+        [Required(ErrorMessage = "Indicar el estado del activo.")]
         [DisplayName("Estado")]
-        public string Status { get; set; }
+        public int StatusId { get; set; }
+        [ForeignKey("StatusId")]
+        public virtual Status AssetStatus { get; set; }
 
-        [Required]
+
+        [Required(ErrorMessage = "Indicar el estado del activo.")]
         [DisplayName("Costo")]
         public decimal Cost { get; set; }
 

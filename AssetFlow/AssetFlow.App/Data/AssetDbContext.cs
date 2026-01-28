@@ -12,9 +12,12 @@ namespace AssetFlow.App.Data
     {
         // Esta propiedad representa la tabla en SQL Server
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
         // Constructor necesario para la fábrica de tiempo de diseño
         public AssetDbContext(DbContextOptions<AssetDbContext> options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -29,6 +32,22 @@ namespace AssetFlow.App.Data
 
                 optionsBuilder.UseSqlServer(connectionString);
             }
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Seed para Categorías
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Hardware" },
+                new Category { Id = 2, Name = "Licencias" },
+                new Category { Id = 3, Name = "Mobiliario" }
+            );
+
+            // Seed para Estados
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = 1, Name = "Por Utilizar" },
+                new Status { Id = 2, Name = "En Uso" },
+                new Status { Id = 3, Name = "Retirado/a" }
+            );
         }
 
     }

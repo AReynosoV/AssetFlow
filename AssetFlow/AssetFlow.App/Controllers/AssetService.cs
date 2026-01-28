@@ -1,4 +1,5 @@
 ﻿using AssetFlow.App.Data;
+using AssetFlow.App.Models;
 using DevExpress.XtraLayout.Customization;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,16 @@ namespace AssetFlow.App.Controllers
             asset.IsDeleted = true;
             _context.Update(asset);
             _context.SaveChanges();
+        }
+
+        public List<AssetFlow.App.Models.Category> GetCategories()
+        {
+            return _context.Categories.ToList();
+        }
+
+        public List<Status> GetStatuses()
+        {
+            return _context.Statuses.ToList();
         }
     }
 }

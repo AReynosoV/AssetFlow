@@ -18,16 +18,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.IdTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.assetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.NameTextEdit = new DevExpress.XtraEditors.TextEdit();
-            this.CategoryIdTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.PurchaseDateDateEdit = new DevExpress.XtraEditors.DateEdit();
-            this.StatusTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.CostTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.simpleButtonGuardar = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCancelar = new DevExpress.XtraEditors.SimpleButton();
+            this.lookUpEditCategoria = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEditEstado = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForId = new DevExpress.XtraLayout.LayoutControlItem();
@@ -38,16 +39,17 @@
             this.ItemForCost = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategoryIdTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StatusTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CostTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCategoria.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditEstado.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForId)).BeginInit();
@@ -58,18 +60,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
             // 
             this.dataLayoutControl1.Controls.Add(this.IdTextEdit);
             this.dataLayoutControl1.Controls.Add(this.NameTextEdit);
-            this.dataLayoutControl1.Controls.Add(this.CategoryIdTextEdit);
             this.dataLayoutControl1.Controls.Add(this.PurchaseDateDateEdit);
-            this.dataLayoutControl1.Controls.Add(this.StatusTextEdit);
             this.dataLayoutControl1.Controls.Add(this.CostTextEdit);
             this.dataLayoutControl1.Controls.Add(this.simpleButtonGuardar);
             this.dataLayoutControl1.Controls.Add(this.simpleButtonCancelar);
+            this.dataLayoutControl1.Controls.Add(this.lookUpEditCategoria);
+            this.dataLayoutControl1.Controls.Add(this.lookUpEditEstado);
             this.dataLayoutControl1.DataSource = this.assetBindingSource;
             this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
@@ -107,21 +110,9 @@
             this.NameTextEdit.Size = new System.Drawing.Size(429, 20);
             this.NameTextEdit.StyleController = this.dataLayoutControl1;
             this.NameTextEdit.TabIndex = 5;
-            // 
-            // CategoryIdTextEdit
-            // 
-            this.CategoryIdTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.assetBindingSource, "CategoryId", true));
-            this.CategoryIdTextEdit.Location = new System.Drawing.Point(111, 60);
-            this.CategoryIdTextEdit.Name = "CategoryIdTextEdit";
-            this.CategoryIdTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.CategoryIdTextEdit.Properties.Appearance.Options.UseTextOptions = true;
-            this.CategoryIdTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.CategoryIdTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.CategoryIdTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.CategoryIdTextEdit.Properties.MaskSettings.Set("mask", "N0");
-            this.CategoryIdTextEdit.Size = new System.Drawing.Size(429, 20);
-            this.CategoryIdTextEdit.StyleController = this.dataLayoutControl1;
-            this.CategoryIdTextEdit.TabIndex = 6;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "El nombre del Activo no puede quedar en blanco.";
+            this.dxValidationProvider1.SetValidationRule(this.NameTextEdit, conditionValidationRule1);
             // 
             // PurchaseDateDateEdit
             // 
@@ -137,16 +128,6 @@
             this.PurchaseDateDateEdit.Size = new System.Drawing.Size(429, 20);
             this.PurchaseDateDateEdit.StyleController = this.dataLayoutControl1;
             this.PurchaseDateDateEdit.TabIndex = 7;
-            // 
-            // StatusTextEdit
-            // 
-            this.StatusTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.assetBindingSource, "Status", true));
-            this.StatusTextEdit.Location = new System.Drawing.Point(111, 108);
-            this.StatusTextEdit.Name = "StatusTextEdit";
-            this.StatusTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.StatusTextEdit.Size = new System.Drawing.Size(429, 20);
-            this.StatusTextEdit.StyleController = this.dataLayoutControl1;
-            this.StatusTextEdit.TabIndex = 8;
             // 
             // CostTextEdit
             // 
@@ -183,6 +164,42 @@
             this.simpleButtonCancelar.StyleController = this.dataLayoutControl1;
             this.simpleButtonCancelar.TabIndex = 11;
             this.simpleButtonCancelar.Text = "Cancelar";
+            // 
+            // lookUpEditCategoria
+            // 
+            this.lookUpEditCategoria.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.assetBindingSource, "CategoryId", true));
+            this.lookUpEditCategoria.Location = new System.Drawing.Point(111, 60);
+            this.lookUpEditCategoria.Name = "lookUpEditCategoria";
+            this.lookUpEditCategoria.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpEditCategoria.Properties.Appearance.Options.UseTextOptions = true;
+            this.lookUpEditCategoria.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lookUpEditCategoria.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditCategoria.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Categoria")});
+            this.lookUpEditCategoria.Properties.DisplayMember = "Name";
+            this.lookUpEditCategoria.Properties.NullText = "";
+            this.lookUpEditCategoria.Properties.ValueMember = "Id";
+            this.lookUpEditCategoria.Size = new System.Drawing.Size(429, 20);
+            this.lookUpEditCategoria.StyleController = this.dataLayoutControl1;
+            this.lookUpEditCategoria.TabIndex = 6;
+            // 
+            // lookUpEditEstado
+            // 
+            this.lookUpEditEstado.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.assetBindingSource, "StatusId", true));
+            this.lookUpEditEstado.Location = new System.Drawing.Point(111, 108);
+            this.lookUpEditEstado.Name = "lookUpEditEstado";
+            this.lookUpEditEstado.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.lookUpEditEstado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditEstado.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Estado")});
+            this.lookUpEditEstado.Properties.DisplayMember = "Name";
+            this.lookUpEditEstado.Properties.NullText = "";
+            this.lookUpEditEstado.Properties.ValueMember = "Id";
+            this.lookUpEditEstado.Size = new System.Drawing.Size(429, 20);
+            this.lookUpEditEstado.StyleController = this.dataLayoutControl1;
+            this.lookUpEditEstado.TabIndex = 8;
             // 
             // Root
             // 
@@ -231,7 +248,7 @@
             // 
             // ItemForCategoryId
             // 
-            this.ItemForCategoryId.Control = this.CategoryIdTextEdit;
+            this.ItemForCategoryId.Control = this.lookUpEditCategoria;
             this.ItemForCategoryId.Location = new System.Drawing.Point(0, 48);
             this.ItemForCategoryId.Name = "ItemForCategoryId";
             this.ItemForCategoryId.Size = new System.Drawing.Size(532, 24);
@@ -249,7 +266,7 @@
             // 
             // ItemForStatus
             // 
-            this.ItemForStatus.Control = this.StatusTextEdit;
+            this.ItemForStatus.Control = this.lookUpEditEstado;
             this.ItemForStatus.Location = new System.Drawing.Point(0, 96);
             this.ItemForStatus.Name = "ItemForStatus";
             this.ItemForStatus.Size = new System.Drawing.Size(532, 24);
@@ -299,11 +316,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.IdTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NameTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CategoryIdTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PurchaseDateDateEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StatusTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CostTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCategoria.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditEstado.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForId)).EndInit();
@@ -314,6 +331,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ItemForCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -326,9 +344,7 @@
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit IdTextEdit;
         private DevExpress.XtraEditors.TextEdit NameTextEdit;
-        private DevExpress.XtraEditors.TextEdit CategoryIdTextEdit;
         private DevExpress.XtraEditors.DateEdit PurchaseDateDateEdit;
-        private DevExpress.XtraEditors.TextEdit StatusTextEdit;
         private DevExpress.XtraEditors.TextEdit CostTextEdit;
         private DevExpress.XtraEditors.SimpleButton simpleButtonGuardar;
         private DevExpress.XtraLayout.LayoutControlItem ItemForId;
@@ -340,5 +356,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCancelar;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
+        private DevExpress.XtraEditors.LookUpEdit lookUpEditCategoria;
+        private DevExpress.XtraEditors.LookUpEdit lookUpEditEstado;
     }
 }

@@ -27,12 +27,17 @@ namespace AssetFlow.App
             //var service = new AssetService();
             //gridControl1.DataSource = service.GetMockAssets();
 
+            
+
+
             // 1. Instanciamos el contexto (usará la configuración que pusimos en OnConfiguring)
             // Nota: Para EF 3.1 en WinForms, esto es suficiente por ahora.
             _context = new AssetDbContext(new Microsoft.EntityFrameworkCore.DbContextOptions<AssetDbContext>());
 
             // 2. Pasamos el contexto al servicio
             _assetService = new AssetService(_context);
+
+            ConfigurarLookUpsGrid();
 
             LoadData();
 
@@ -69,7 +74,7 @@ namespace AssetFlow.App
             if (selectedAsset != null)
             {
                 // 2. Creamos una instancia del editor pasando el activo
-                using (var editor = new XtraAssetEditor(selectedAsset))
+                using (var editor = new XtraAssetEditor(selectedAsset, _assetService))
                 {
                     // 3. Mostramos como diálogo y verificamos si se guardó
                     if (editor.ShowDialog() == DialogResult.OK)
@@ -105,35 +110,29 @@ namespace AssetFlow.App
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            // 1. Creamos un objeto Asset nuevo (vacío)
+            // 1. Preparamos el objeto nuevo
             var nuevoAsset = new Asset
             {
+                Name = "",
                 PurchaseDate = DateTime.Now,
-                Status = "Nuevo"
+                CategoryId = 1,
+                StatusId = 1
             };
 
-            // 2. Abrimos el editor (pasando el objeto vacío)
-            using (var editor = new XtraAssetEditor(nuevoAsset))
+            // 2. SOLO UN BLOQUE USING
+            using (var editor = new XtraAssetEditor(nuevoAsset, _assetService))
             {
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    // 1. Obtenemos el objeto que el usuario llenó en el editor
-                    var newAsset = editor.CurrentAsset;
+                    // 3. Obtenemos el resultado y guardamos en la VM
+                    var assetFinal = editor.CurrentAsset;
+                    _assetService.AddAsset(assetFinal);
 
-                    // 2. LLAMADA REAL AL SERVICIO (Esto es lo que faltaba)
-                    _assetService.AddAsset(newAsset);
-
-                    // 3. Refrescar el Grid para ver el nuevo ID generado por la VM
+                    // 4. Refrescamos la pantalla
                     LoadData();
-
-                    //// 3. Obtenemos la lista actual del Grid y añadimos el nuevo
-                    //var lista = gridControl1.DataSource as List<Asset>;
-                    //lista?.Add(nuevoAsset);
-
-                    //// 4. Refrescamos para que aparezca en pantalla
-                    //gridControl1.RefreshDataSource();
                 }
             }
+            // Asegúrate de que NO haya más código de "new XtraAssetEditor" debajo de esta llave
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -147,6 +146,23 @@ namespace AssetFlow.App
             {
                 PerformDelete();
             }
+        }
+
+        private void ConfigurarLookUpsGrid()
+        {
+            // 1. Obtener los datos frescos de la base de datos
+            var categorias = _assetService.GetCategories();
+            var estados = _assetService.GetStatuses();
+
+            // 2. Configurar el Repositorio de Categorías
+            repositoryItemLookUpCategoria.DataSource = categorias;
+            repositoryItemLookUpCategoria.DisplayMember = "Name";
+            repositoryItemLookUpCategoria.ValueMember = "Id";
+
+            // 3. Configurar el Repositorio de Estados
+            repositoryItemLookUpEstado.DataSource = estados;
+            repositoryItemLookUpEstado.DisplayMember = "Name";
+            repositoryItemLookUpEstado.ValueMember = "Id";
         }
     }
 }
