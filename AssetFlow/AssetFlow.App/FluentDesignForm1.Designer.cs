@@ -37,19 +37,23 @@
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCategoryId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpCategoria = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colPurchaseDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEstado = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.colCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
             this.accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionControlElement1 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnNuevo = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.btnEliminar = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.fluentDesignFormContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpCategoria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEstado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
@@ -72,6 +76,9 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.fluentFormDefaultManager1;
             this.gridControl1.Name = "gridControl1";
+            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemLookUpCategoria,
+            this.repositoryItemLookUpEstado});
             this.gridControl1.Size = new System.Drawing.Size(876, 564);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -108,10 +115,19 @@
             // 
             // colCategoryId
             // 
+            this.colCategoryId.Caption = "Categoría";
+            this.colCategoryId.ColumnEdit = this.repositoryItemLookUpCategoria;
             this.colCategoryId.FieldName = "CategoryId";
             this.colCategoryId.Name = "colCategoryId";
             this.colCategoryId.Visible = true;
             this.colCategoryId.VisibleIndex = 2;
+            // 
+            // repositoryItemLookUpCategoria
+            // 
+            this.repositoryItemLookUpCategoria.AutoHeight = false;
+            this.repositoryItemLookUpCategoria.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpCategoria.Name = "repositoryItemLookUpCategoria";
             // 
             // colPurchaseDate
             // 
@@ -122,10 +138,18 @@
             // 
             // colStatus
             // 
-            this.colStatus.FieldName = "Status";
+            this.colStatus.ColumnEdit = this.repositoryItemLookUpEstado;
+            this.colStatus.FieldName = "StatusId";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 4;
+            // 
+            // repositoryItemLookUpEstado
+            // 
+            this.repositoryItemLookUpEstado.AutoHeight = false;
+            this.repositoryItemLookUpEstado.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEstado.Name = "repositoryItemLookUpEstado";
             // 
             // colCost
             // 
@@ -168,6 +192,14 @@
             this.btnNuevo.Text = "Nuevo Activo";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btnEliminar.Text = "Eliminar Activo";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // fluentDesignFormControl1
             // 
             this.fluentDesignFormControl1.FluentDesignForm = this;
@@ -177,14 +209,6 @@
             this.fluentDesignFormControl1.Size = new System.Drawing.Size(1136, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.btnEliminar.Text = "Eliminar Activo";
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // FluentDesignForm1
             // 
@@ -206,6 +230,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpCategoria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEstado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
@@ -230,6 +256,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCost;
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnNuevo;
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnEliminar;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpCategoria;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEstado;
     }
 }
 

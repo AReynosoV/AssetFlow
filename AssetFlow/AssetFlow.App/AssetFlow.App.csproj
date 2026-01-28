@@ -195,8 +195,18 @@
     <Compile Include="Migrations\20260126165630_AddSoftDeleteToAsset.Designer.cs">
       <DependentUpon>20260126165630_AddSoftDeleteToAsset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20260128031721_AddCategoryAndStatus.cs" />
+    <Compile Include="Migrations\20260128031721_AddCategoryAndStatus.Designer.cs">
+      <DependentUpon>20260128031721_AddCategoryAndStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20260128035842_TestSeedData.cs" />
+    <Compile Include="Migrations\20260128035842_TestSeedData.Designer.cs">
+      <DependentUpon>20260128035842_TestSeedData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AssetDbContextModelSnapshot.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\XtraAssetEditor.cs">

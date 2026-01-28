@@ -4,14 +4,16 @@ using AssetFlow.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AssetFlow.App.Migrations
 {
     [DbContext(typeof(AssetDbContext))]
-    partial class AssetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260128031721_AddCategoryAndStatus")]
+    partial class AddCategoryAndStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,23 +71,6 @@ namespace AssetFlow.App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Hardware"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Licencias"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Mobiliario"
-                        });
                 });
 
             modelBuilder.Entity("AssetFlow.App.Models.Status", b =>
@@ -103,23 +88,6 @@ namespace AssetFlow.App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Por Utilizar"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "En Uso"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Retirado/a"
-                        });
                 });
 
             modelBuilder.Entity("AssetFlow.App.Models.Asset", b =>
