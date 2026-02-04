@@ -103,7 +103,7 @@ namespace AssetFlow.App
                 if (result == DialogResult.Yes)
                 {
                     _assetService.SoftDeleteAsset(selectedAsset);
-                    LoadData(); // Recargamos el grid, el registro "desaparecerá"
+                    LoadData(); // Recargamos el grid, el registro "desaparecerá" 
                 }
             }
         }

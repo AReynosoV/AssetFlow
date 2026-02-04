@@ -39,7 +39,7 @@ namespace AssetFlow.App.Controllers
 
         public void SoftDeleteAsset(Models.Asset asset) 
         {
-            // En lugar de _context.Assets.Remove(asset), hacemos:
+            // En lugar de _context.Assets.Remove(asset), hacemos magia:
             asset.IsDeleted = true;
             _context.Update(asset);
             _context.SaveChanges();
