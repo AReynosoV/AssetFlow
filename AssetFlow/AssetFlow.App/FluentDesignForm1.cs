@@ -91,7 +91,7 @@ namespace AssetFlow.App
             }
         }
 
-        private void PerformDelete()
+        private void PerformDelete() 
         {
             var selectedAsset = gridView1.GetFocusedRow() as Asset;
 
