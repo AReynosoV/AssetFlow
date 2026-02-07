@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AssetFlow.App.Models; // Asegúrate de que este sea el namespace de tu clase Asset
 
+
 namespace AssetFlow.App.Data
 {
     public class AssetDbContext : DbContext

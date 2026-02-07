@@ -47,6 +47,7 @@
             this.accordionControlElement1 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnNuevo = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnEliminar = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btnEditar = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.fluentDesignFormContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -166,7 +167,8 @@
             // 
             this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            this.accordionControlElement1});
+            this.accordionControlElement1,
+            this.btnEditar});
             this.accordionControl1.Location = new System.Drawing.Point(0, 31);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
@@ -185,7 +187,6 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevo.ImageOptions.Image")));
             this.btnNuevo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnNuevo.ImageOptions.SvgImage")));
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
@@ -199,6 +200,19 @@
             this.btnEliminar.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.btnEliminar.Text = "Eliminar Activo";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderTemplate.AddRange(new DevExpress.XtraBars.Navigation.HeaderElementInfo[] {
+            new DevExpress.XtraBars.Navigation.HeaderElementInfo(DevExpress.XtraBars.Navigation.HeaderElementType.Image),
+            new DevExpress.XtraBars.Navigation.HeaderElementInfo(DevExpress.XtraBars.Navigation.HeaderElementType.Text),
+            new DevExpress.XtraBars.Navigation.HeaderElementInfo(DevExpress.XtraBars.Navigation.HeaderElementType.ContextButtons, DevExpress.XtraBars.Navigation.HeaderElementAlignment.Left),
+            new DevExpress.XtraBars.Navigation.HeaderElementInfo(DevExpress.XtraBars.Navigation.HeaderElementType.HeaderControl)});
+            this.btnEditar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("accordionControlElement2.ImageOptions.SvgImage")));
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btnEditar.Text = "Editar Activo";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // fluentDesignFormControl1
             // 
@@ -258,6 +272,7 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnEliminar;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpCategoria;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEstado;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btnEditar;
     }
 }
 

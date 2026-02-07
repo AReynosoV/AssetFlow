@@ -1,105 +1,88 @@
-﻿using AssetFlow.App.Controllers;
-using AssetFlow.App.Models;
-using DevExpress.XtraEditors;
+﻿using AssetFlow.App.Models;
+using AssetFlow.App.Controllers; // Asegúrate de que aquí estén tus servicios
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static DevExpress.Utils.Filtering.ExcelFilterOptions;
 
 namespace AssetFlow.App.Views
 {
     public partial class XtraAssetEditor : DevExpress.XtraEditors.XtraForm
     {
-        // 1. Estas son las variables que faltan (Corrige los errores CS0103)
-        private Asset _currentAsset;
-        private AssetService _service;
-        public Asset CurrentAsset { get; set; } // Propiedad para devolver el resultado
+        // 1. Únicas variables necesarias
+        private readonly AssetService _service;
+        public Asset CurrentAsset { get; set; }
 
-
-        //Variable para mantener el objeto que editamos
-        public Models.Asset SelectedAsset { get; set; }
-        public XtraAssetEditor(Models.Asset asset, AssetService service)
-
+        // 2. Un solo constructor maestro para Nuevo y Editar
+        public XtraAssetEditor(AssetService service, Asset asset = null)
         {
             InitializeComponent();
-            this.SelectedAsset = asset;
-            _currentAsset = asset;
-            _service = service;
+            _service = service; // Recibimos el servicio del formulario principal
 
             CargarCatalogos();
-            EnlazarDatos();
-            //Vinculamos el objeto al BindingSource
-            //assetBindingSource.DataSource = asset;
+
+            if (asset != null)
+            {
+                //CurrentAsset = asset;
+                this.CurrentAsset = asset;
+                MapearObjetoAControles();
+            }
+            else
+            {
+                // Si es nuevo, inicializamos un objeto vacío
+                CurrentAsset = new Asset { PurchaseDate = DateTime.Now };
+            }
         }
-
-
-        // private Asset _currentAsset;
-        private AssetService _assetService; // Variable para guardar el servicio
 
         private void CargarCatalogos()
         {
-            // 1. Asignar los datos desde el servicio (consulta a la VM)
-            lookUpEditCategoria.Properties.DataSource = _service.GetCategories();
-            lookUpEditEstado.Properties.DataSource = _service.GetStatuses();
+            var categorias = _service.GetCategories();
+            var estados = _service.GetStatuses();
 
-            // 2. Definir qué propiedad se muestra y cuál es el ID oculto
-            lookUpEditCategoria.Properties.DisplayMember = "Name"; // Lo que el usuario lee
-            lookUpEditCategoria.Properties.ValueMember = "Id";     // El ID técnico
+            // DEBUG: Si esto lanza un mensaje, la base de datos está vacía o desconectada
+            if (categorias.Count == 0)
+            {
+                Console.WriteLine("ADVERTENCIA: No se recuperaron categorías de SQL Server.");
+            }
 
-            lookUpEditEstado.Properties.DisplayMember = "Name";
+            lookUpEditCategoria.Properties.DataSource = categorias;
+            lookUpEditCategoria.Properties.DisplayMember = "Name"; // Debe coincidir con la clase Category
+            lookUpEditCategoria.Properties.ValueMember = "Id";
+
+            lookUpEditEstado.Properties.DataSource = estados;
+            lookUpEditEstado.Properties.DisplayMember = "Name"; // Debe coincidir con la clase Status
             lookUpEditEstado.Properties.ValueMember = "Id";
 
-            // 3. (Opcional) Limpiar el texto inicial si no hay selección
-            lookUpEditCategoria.Properties.NullText = "[Seleccione Categoría]";
-            lookUpEditEstado.Properties.NullText = "[Seleccione Estado]";
+            lookUpEditCategoria.Properties.ForceInitialize();
+            lookUpEditEstado.Properties.ForceInitialize();
         }
 
-        private void EnlazarDatos()
+        private void MapearObjetoAControles()
         {
-            if (_currentAsset != null)
-            {
-                NameTextEdit.Text = _currentAsset.Name;
-                // Asignamos el ID directamente al EditValue del combo
-                lookUpEditCategoria.EditValue = _currentAsset.CategoryId;
-                lookUpEditEstado.EditValue = _currentAsset.StatusId;
+            if (CurrentAsset == null) return;
 
-                // No olvides los campos nuevos si los tienes
-                CostTextEdit.EditValue = _currentAsset.Cost;
-                PurchaseDateDateEdit.DateTime = _currentAsset.PurchaseDate;
-            }
+            NameTextEdit.Text = CurrentAsset.Name;
+            PurchaseDateDateEdit.DateTime = CurrentAsset.PurchaseDate;
+            CostTextEdit.EditValue = CurrentAsset.Cost;
+
+            // Para los combos, asignamos el ID al EditValue
+            lookUpEditCategoria.EditValue = CurrentAsset.CategoryId;
+            lookUpEditEstado.EditValue = CurrentAsset.StatusId;
         }
 
         private void simpleButtonGuardar_Click(object sender, EventArgs e)
         {
-            // Validar todos los controles vinculados al DXValidationProvider
-            if (!dxValidationProvider1.Validate())
-            {
-                return; // Si hay errores visuales, no hace nada y el usuario ve los iconos rojos
-            }
+            // 1. Validar reglas (Issue #13)
+            if (!dxValidationProvider1.Validate()) return;
 
-            // Antes de que el formulario se cierre por el DialogResult...
-            // Mapeamos los datos de los cuadros de texto al objeto
-            CurrentAsset = new Asset
-            {
-                Name = NameTextEdit.Text,
-                CategoryId = (int)lookUpEditCategoria.EditValue,
-                StatusId = (int)lookUpEditEstado.EditValue,
-                PurchaseDate = PurchaseDateDateEdit.DateTime,
-                Cost = decimal.Parse(CostTextEdit.Text),
-                IsDeleted = false
-                
-            };
-            
+            // 2. Mapear de regreso al objeto
+            CurrentAsset.Name = NameTextEdit.Text;
+            CurrentAsset.CategoryId = (int)lookUpEditCategoria.EditValue;
+            CurrentAsset.StatusId = (int)lookUpEditEstado.EditValue;
+            CurrentAsset.PurchaseDate = PurchaseDateDateEdit.DateTime;
+            CurrentAsset.Cost = Convert.ToDecimal(CostTextEdit.EditValue);
+            CurrentAsset.IsDeleted = false;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
-            
         }
     }
 }

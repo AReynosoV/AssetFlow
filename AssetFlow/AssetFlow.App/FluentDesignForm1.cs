@@ -27,7 +27,7 @@ namespace AssetFlow.App
             //var service = new AssetService();
             //gridControl1.DataSource = service.GetMockAssets();
 
-            
+
 
 
             // 1. Instanciamos el contexto (usará la configuración que pusimos en OnConfiguring)
@@ -67,31 +67,10 @@ namespace AssetFlow.App
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            // 1. Obtenemos el objeto seleccionado en el Grid
-            //Asset selected = gridView1.GetFocusedRow() as Asset;
-            var selectedAsset = gridView1.GetFocusedRow() as Asset;
-
-            if (selectedAsset != null)
-            {
-                // 2. Creamos una instancia del editor pasando el activo
-                using (var editor = new XtraAssetEditor(selectedAsset, _assetService))
-                {
-                    // 3. Mostramos como diálogo y verificamos si se guardó
-                    if (editor.ShowDialog() == DialogResult.OK)
-                    {
-                        // 3. LLAMADA AL SERVICIO PARA ACTUALIZAR (El paso faltante)
-                        _assetService.UpdateAsset(selectedAsset);
-
-                        // Aquí refrescaremos el Grid más adelante
-                        gridControl1.RefreshDataSource();
-
-                        LoadData();
-                    }
-                }
-            }
+            btnEditar_Click(sender, e); // Ahora que el botón es robusto, esto funcionará          
         }
 
-        private void PerformDelete() 
+        private void PerformDelete()
         {
             var selectedAsset = gridView1.GetFocusedRow() as Asset;
 
@@ -120,7 +99,7 @@ namespace AssetFlow.App
             };
 
             // 2. SOLO UN BLOQUE USING
-            using (var editor = new XtraAssetEditor(nuevoAsset, _assetService))
+            using (var editor = new XtraAssetEditor(_assetService))
             {
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -133,6 +112,26 @@ namespace AssetFlow.App
                 }
             }
             // Asegúrate de que NO haya más código de "new XtraAssetEditor" debajo de esta llave
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            // 1. Validar que realmente hayamos capturado el objeto del Grid
+            if (!(gridView1.GetFocusedRow() is Asset selectedAsset))
+            {
+                MessageBox.Show("No se pudo recuperar el activo seleccionado.");
+                return;
+            }
+
+            // 2. Pasar el servicio Y el activo (en ese orden)
+            using (var editor = new XtraAssetEditor(_assetService, selectedAsset))
+            {
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    _assetService.UpdateAsset(editor.CurrentAsset);
+                    LoadData();
+                }
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -164,5 +163,7 @@ namespace AssetFlow.App
             repositoryItemLookUpEstado.DisplayMember = "Name";
             repositoryItemLookUpEstado.ValueMember = "Id";
         }
+
+
     }
 }
